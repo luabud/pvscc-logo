@@ -35,17 +35,15 @@ stopwords.update(["see","quot","use", "using", "tutorial", "Python", "Node", "js
 
 python_mask = np.array(Image.open("images/python-colored-mask.png"))
 wc = WordCloud(background_color="white", max_words=2000, mask=python_mask,
- contour_width=3, contour_color='steelblue',stopwords=stopwords).generate(clean_raw_content)#,
+ contour_width=3, contour_color='steelblue',stopwords=stopwords).generate(clean_raw_content) 
 
 image_colors = ImageColorGenerator(python_mask)
 # %%
 import matplotlib.pyplot as plt
-fig, axes = plt.subplots(1, 3)
+fig, axes = plt.subplots(1,1)
 
 # recolor wordcloud and show
 # we could also give color_func=image_colors directly in the constructor
-axes[0].imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
-
-for ax in axes:
-    ax.set_axis_off()
+axes.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
+plt.axis('off')
 plt.show()
