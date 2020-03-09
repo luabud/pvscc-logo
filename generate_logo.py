@@ -12,7 +12,7 @@ import requests
 def remove_html_tags(text):
     """Remove html tags from a string"""
     import re
-    clean = re.compile('(<.*?>)|\\n|\\r|\\t|\(|\)|\{|\}|\]|\[')
+    clean = re.compile('(<.*?>)|\\n|\\r|\\t|\(|\)|\{|\}|\]|\[|\$')
     return re.sub(clean, '', text)
 
 r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
@@ -31,7 +31,7 @@ import os
 #raw_words = clean_raw_content.split()
 ImageFile.LOAD_TRUNCATED_IMAGES = True
 stopwords = set(STOPWORDS)
-stopwords.update(["see","quot","use", "using", "tutorial", "Python", "Node", "js", "file"])
+stopwords.update(["see","quot","use", "using", "tutorial", "Python", "Node", "js", "file", "http", "https", "Java", "FAQ", "Hello", "World"])
 
 python_mask = np.array(Image.open("images/python-colored-mask.png"))
 wc = WordCloud(background_color="white", max_words=2000, mask=python_mask,
