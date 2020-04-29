@@ -1,4 +1,3 @@
-
 from bs4 import BeautifulSoup as bs
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import numpy as np 
