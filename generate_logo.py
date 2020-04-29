@@ -1,49 +1,38 @@
-# To add a new cell, type '# %%'
-# To add a new markdown cell, type '# %% [markdown]'
-# %% [markdown]
-# # Generating Logo for PVSC
-# %% [markdown]
-# Initial exploration for raw content of docs
-# 
 
-# %%
-import requests
-# from https://medium.com/@jorlugaqui/how-to-strip-html-tags-from-a-string-in-python-7cb81a2bbf44
-def remove_html_tags(text):
-    """Remove html tags from a string"""
-    import re
-    clean = re.compile('(<.*?>)|\\n|\\r|\\t|\(|\)|\{|\}|\]|\[')
-    return re.sub(clean, '', text)
-
-r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
-raw_content = r.content.decode("utf-8")
-
-clean_raw_content = remove_html_tags(raw_content)
-
-
-# %%
-
+from bs4 import BeautifulSoup as bs
 from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import numpy as np 
-from PIL import Image, ImageFile
-from os import path
-import os
-#raw_words = clean_raw_content.split()
-ImageFile.LOAD_TRUNCATED_IMAGES = True
-stopwords = set(STOPWORDS)
-stopwords.update(["see","quot","use", "using", "tutorial", "Python", "Node", "js", "file"])
-
-python_mask = np.array(Image.open("images/python-colored-mask.png"))
-wc = WordCloud(background_color="white", max_words=2000, mask=python_mask,
- contour_width=3, contour_color='steelblue',stopwords=stopwords).generate(clean_raw_content) 
-
-image_colors = ImageColorGenerator(python_mask)
-# %%
+from PIL import Image
 import matplotlib.pyplot as plt
-fig, axes = plt.subplots(1,1)
+from flask import Flask, Response
+import io
+import requests
 
-# recolor wordcloud and show
-# we could also give color_func=image_colors directly in the constructor
-axes.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
-plt.axis('off')
-plt.show()
+app = Flask(__name__)
+
+@app.route('/')
+def index():
+    output = generate_fig()
+    return Response(output.getvalue(), mimetype="image/png")
+    
+def generate_fig():
+    r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
+    parsed_content = bs(r.content, features="html.parser")
+    clean_raw_content= ''.join(parsed_content.findAll(text=True))
+    
+    stopwords = set(STOPWORDS)
+    stopwords.update(["see","use", "using", "tutorial", "Python", "Node", "js", "file"])
+
+    python_mask = np.array(Image.open("images/python-colored-mask.png"))
+    wc = WordCloud(background_color="black", max_words=2000, mask=python_mask,
+    contour_width=10, contour_color='white',stopwords=stopwords).generate(clean_raw_content) 
+
+    image_colors = ImageColorGenerator(python_mask)
+    fig, axes = plt.subplots(1,1)
+    axes.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
+    plt.axis('off')
+    
+    bytes_image = io.BytesIO()
+    plt.savefig(bytes_image, format='png', facecolor="black")
+    return bytes_image
+    
