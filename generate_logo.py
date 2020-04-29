@@ -3,16 +3,8 @@ from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
 import numpy as np 
 from PIL import Image
 import matplotlib.pyplot as plt
-from flask import Flask, Response
 import io
 import requests
-
-app = Flask(__name__)
-
-@app.route('/')
-def index():
-    output = generate_fig()
-    return Response(output.getvalue(), mimetype="image/png")
     
 def generate_fig():
     r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
