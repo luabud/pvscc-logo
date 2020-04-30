@@ -5,16 +5,21 @@ from PIL import Image
 import matplotlib.pyplot as plt
 import io
 import requests
-    
-def generate_fig():
-    r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
+
+target_url = "https://code.visualstudio.com/docs/python/python-tutorial"
+mask = "images/python-colored-mask.png"
+
+
+def generate_fig(target_url, mask):
+    r = requests.get(url=target_url)
     parsed_content = bs(r.content, features="html.parser")
     clean_raw_content= ''.join(parsed_content.findAll(text=True))
     
     stopwords = set(STOPWORDS)
-    stopwords.update(["see","use", "using", "tutorial", "Python", "Node", "js", "file"])
+    stopwords.update(["see","use", "using", "tutorial", "Node", "js", "file"])
 
-    python_mask = np.array(Image.open("images/python-colored-mask.png"))
+    python_mask = np.array(Image.open(mask))
+    
     wc = WordCloud(background_color="black", max_words=2000, mask=python_mask,
     contour_width=10, contour_color='white',stopwords=stopwords).generate(clean_raw_content) 
 
