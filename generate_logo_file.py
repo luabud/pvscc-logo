@@ -1,33 +1,29 @@
 # To add a new cell, type '# %%'
 # To add a new markdown cell, type '# %% [markdown]'
 # %% [markdown]
-# # Generating Logo for PVSC
+# # Generating a logo from the Python extension for VS Code docs 
 # %% [markdown]
 # ### Initial exploration for raw content of docs
 # 
 
 # %%
 import requests
+target_url = "https://code.visualstudio.com/docs/python/python-tutorial"
+
+
+# %%
+
 # from https://medium.com/@jorlugaqui/how-to-strip-html-tags-from-a-string-in-python-7cb81a2bbf44
-def remove_html_tags(text):
-    """Remove html tags from a string"""
+def remove_tags(text):
+    """Remove html tags and functions from a string"""
     import re
     clean = re.compile('(<.*?>)|\\n|\\r|\\t|\(|\)|\{|\}|\]|\[')
     return re.sub(clean, '', text)
 
-r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
+r = requests.get(url=target_url)
 raw_content = r.content.decode("utf-8")
 
-clean_raw_content = remove_html_tags(raw_content)
-
-
-# %%
-import requests
-from bs4 import BeautifulSoup as bs
-
-r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
-parsed_content = bs(r.text, features="html.parser")
-clean_raw_content = ''.join(parsed_content.findAll(text=True))
+clean_raw_content = remove_tags(raw_content)
 
 
 # %%
