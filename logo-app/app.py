@@ -13,12 +13,3 @@ def index():
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=8000, debug=True)
 
-
-
-# @app.route('/')
-# def index():
-#     return 'Hello World!'
-    # output = generate_fig("https://code.visualstudio.com/docs/python/python-tutorial")
-    # return Response(output.getvalue(), mimetype="image/png")
-    
-
