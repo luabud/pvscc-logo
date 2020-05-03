@@ -1,14 +1,14 @@
 import base64
 import io
+import pathlib
 from os import path
 
+import httpx
 import matplotlib.pyplot as plt
 import numpy as np
-import httpx
 from bs4 import BeautifulSoup as bs
 from PIL import Image
 from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
-import pathlib
 
 
 def generate_fig(url, mask_path):
@@ -59,7 +59,7 @@ def generate_image(logo_path, wc, mask=None):
     if not mask:
         image_colors = ImageColorGenerator(mask)
         wc = wc.recolor(color_func=image_colors)
-        
+
     axes.imshow(wc, interpolation="bilinear")
 
     plt.savefig(logo_path, format="png", facecolor="black")
