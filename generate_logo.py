@@ -1,14 +1,12 @@
-import base64
 import io
+from bs4 import BeautifulSoup as bs
 import pathlib
 from os import path
-
+from PIL import Image
+from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 import httpx
 import matplotlib.pyplot as plt
 import numpy as np
-from bs4 import BeautifulSoup as bs
-from PIL import Image
-from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 
 
 def generate_fig(url, mask_path):
