@@ -31,7 +31,7 @@ def parse_content(url):
 
 
 def generate_wordcloud(content, mask=None):
-    stopwords = set(STOPWORDS) | {
+    stopwords = STOPWORDS | {
         "see",
         "use",
         "using",
@@ -40,8 +40,7 @@ def generate_wordcloud(content, mask=None):
         "js",
         "file",
     }
-    # stopwords.update(["see", "use", "using", "tutorial", "Node", "js", "file"])
-
+    
     wc = WordCloud(
         background_color="black",
         max_words=2000,
@@ -60,7 +59,7 @@ def generate_image(logo_path, wc, mask=None):
     if not mask:
         image_colors = ImageColorGenerator(mask)
         wc = wc.recolor(color_func=image_colors)
-    # TODO TEST TO SEE IF THIS WORKS
+        
     axes.imshow(wc, interpolation="bilinear")
 
     plt.savefig(logo_path, format="png", facecolor="black")
