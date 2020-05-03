@@ -6,7 +6,6 @@ from . import generate_logo
 from . import app
 
 
-
 @app.route("/")
 def index():
     url = "https://code.visualstudio.com/docs/python/python-tutorial"
@@ -16,4 +15,3 @@ def index():
     output = generate_logo.generate_fig(url, mask_path)
 
     return render_template("index.html", image=output)
-
