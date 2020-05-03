@@ -10,14 +10,12 @@
             "request": "launch",
             "module": "flask",
             "env": {
-                "FLASK_APP": "logoapp.app",
+                "FLASK_APP": "logo_app.webapp",
                 "FLASK_ENV": "development",
-                "FLASK_DEBUG": "0"
+                "FLASK_DEBUG": "1"
             },
             "args": [
                 "run",
-                "--no-debugger",
-                "--no-reload"
             ],
             "jinja": true
         }
