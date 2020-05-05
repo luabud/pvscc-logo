@@ -54,7 +54,7 @@ def generate_wordcloud(content, mask=None):
 def generate_image(logo_path, wc, mask=None):
     fig, axes = plt.subplots(1, 1)
     plt.axis("off")
-    if not mask:
+    if mask is not None:
         image_colors = ImageColorGenerator(mask)
         wc = wc.recolor(color_func=image_colors)
 
