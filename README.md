@@ -23,7 +23,7 @@ Demo for creating a word cloud based on the [Python for VS Code](https://code.vi
     ```
 ## Install the dependencies
 - Install dependencies from requirements.txt:
-    On MacOs/Linux:
+
     ```shell
     (env)$ pip install -r requirements.txt
     ```
