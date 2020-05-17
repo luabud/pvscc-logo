@@ -7,16 +7,13 @@
 # 
 
 # %%
-import requests
-from html.parser import HTMLParser
+import httpx
 from bs4 import BeautifulSoup as bs
 
-r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
-raw_content = r.text
-raw_content=bs(r.text)
-all_text = ''.join(raw_content.findAll(text=True))
-raw_content.findAll(text=True)
-print(all_text)
+r = httpx.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
+parsed_content = bs(r.text, features="html.parser")
+clean_raw_content = ''.join(parsed_content.findAll(text=True))
+
 
 # %%
 
@@ -24,7 +21,6 @@ from wordcloud import WordCloud, STOPWORDS
 raw_words = clean_raw_content.split()
 
 stopwords = set(STOPWORDS)
-#stopwords.add("said")
 
 wc = WordCloud(background_color="black", max_words=2000, 
                stopwords=stopwords).generate(clean_raw_content)
@@ -43,7 +39,8 @@ plt.axis("off")
 # %%
 from PIL import Image, ImageFile
 import numpy as np
-python_mask = np.array(Image.open("images/python-mask.png"))
+
+python_mask = np.array(Image.open("logo_app/static/images/python-mask.png"))
 
 wc = WordCloud(background_color="white", max_words=2000, mask=python_mask, stopwords=stopwords,  contour_width=3, contour_color='steelblue').generate(clean_raw_content)
 
@@ -61,9 +58,9 @@ plt.axis("off")
 
 # %%
 from wordcloud import ImageColorGenerator
-python_mask = np.array(Image.open("images/python-colored-mask.png"))
+python_mask = np.array(Image.open("logo_app/static/images/python-colored-mask.png"))
 
-wc = WordCloud(background_color="white", max_words=2000, mask=python_mask, stopwords=stopwords,  contour_width=3, contour_color='steelblue').generate(clean_raw_content)
+wc = WordCloud(background_color="white", max_words=2000, mask=python_mask, stopwords=stopwords,  contour_width=10, contour_color='steelblue').generate(clean_raw_content)
 image_colors = ImageColorGenerator(python_mask)
 
 
