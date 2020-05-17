@@ -1,4 +1,5 @@
 # pvscc-logo
+<<<<<<< HEAD
 Demo for creating a word cloud based on the [Python for VS Code](https://code.visualstudio.com/docs/python/python-tutorial) Getting Started Tutorial.
 
 
@@ -31,3 +32,6 @@ Demo for creating a word cloud based on the [Python for VS Code](https://code.vi
 
 
 
+=======
+Demo for creating a word cloud based on a docs website  
+>>>>>>> 8b75e6df9f437e3608d3e58ebdb3804c5c0d160c
