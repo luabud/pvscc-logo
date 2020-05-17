@@ -5,3 +5,4 @@ numpy
 wordcloud
 matplotlib
 beautifulsoup4
+pytest
