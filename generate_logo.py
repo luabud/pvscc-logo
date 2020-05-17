@@ -1,38 +1,63 @@
-
-from bs4 import BeautifulSoup as bs
-from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
-import numpy as np 
-from PIL import Image
-import matplotlib.pyplot as plt
-from flask import Flask, Response
 import io
-import requests
+from bs4 import BeautifulSoup as bs
+import pathlib
+from os import path
+from PIL import Image
+from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
+import httpx
+import matplotlib.pyplot as plt
+import numpy as np
 
-app = Flask(__name__)
 
-@app.route('/')
-def index():
-    output = generate_fig()
-    return Response(output.getvalue(), mimetype="image/png")
-    
-def generate_fig():
-    r = requests.get(url="https://code.visualstudio.com/docs/python/python-tutorial")
+def generate_fig(url, mask_path):
+    logo_path = mask_path.parent / "logo.png"
+    if not logo_path.exists():
+
+        content = parse_content(url)
+        wc_mask = np.array(Image.open(mask_path))
+        wc = generate_wordcloud(content, wc_mask)
+        generate_image(logo_path, wc, wc_mask)
+
+    return "/static/images/logo.png"
+
+
+def parse_content(url):
+    r = httpx.get(url)
     parsed_content = bs(r.content, features="html.parser")
-    clean_raw_content= ''.join(parsed_content.findAll(text=True))
-    
-    stopwords = set(STOPWORDS)
-    stopwords.update(["see","use", "using", "tutorial", "Python", "Node", "js", "file"])
+    clean_raw_content = "".join(parsed_content.findAll(text=True))
+    return clean_raw_content
 
-    python_mask = np.array(Image.open("images/python-colored-mask.png"))
-    wc = WordCloud(background_color="black", max_words=2000, mask=python_mask,
-    contour_width=10, contour_color='white',stopwords=stopwords).generate(clean_raw_content) 
 
-    image_colors = ImageColorGenerator(python_mask)
-    fig, axes = plt.subplots(1,1)
-    axes.imshow(wc.recolor(color_func=image_colors), interpolation="bilinear")
-    plt.axis('off')
+def generate_wordcloud(content, mask=None):
+    stopwords = STOPWORDS | {
+        "see",
+        "use",
+        "using",
+        "tutorial",
+        "Node",
+        "js",
+        "file",
+    }
     
-    bytes_image = io.BytesIO()
-    plt.savefig(bytes_image, format='png', facecolor="black")
-    return bytes_image
-    
+    wc = WordCloud(
+        background_color="black",
+        max_words=2000,
+        mask=mask,
+        contour_width=10,
+        contour_color="white",
+        stopwords=stopwords,
+    )
+
+    return wc.generate(content)
+
+
+def generate_image(logo_path, wc, mask=None):
+    fig, axes = plt.subplots(1, 1)
+    plt.axis("off")
+    if mask is not None:
+        image_colors = ImageColorGenerator(mask)
+        wc = wc.recolor(color_func=image_colors)
+
+    axes.imshow(wc, interpolation="bilinear")
+
+    plt.savefig(logo_path, format="png", facecolor="black")

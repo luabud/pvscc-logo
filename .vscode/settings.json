@@ -1,5 +1,3 @@
 {
-    "python.pythonPath": "c:\\Users\\luabud\\Apps\\pvsc-logo\\env\\Scripts\\python.exe",
-    "python.linting.enabled": true,
-    
+    "python.jediEnabled": false
 }
