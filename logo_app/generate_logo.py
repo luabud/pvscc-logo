@@ -4,6 +4,9 @@ import pathlib
 from os import path
 
 import httpx
+import matplotlib as mpl
+
+mpl.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 from bs4 import BeautifulSoup as bs
@@ -40,7 +43,7 @@ def generate_wordcloud(content, mask=None):
         "js",
         "file",
     }
-    
+
     wc = WordCloud(
         background_color="black",
         max_words=2000,
