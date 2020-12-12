@@ -28,7 +28,7 @@ matplotlib==3.2.0         # via -r requirements.in, wordcloud
 more-itertools==8.3.0     # via pytest
 numpy==1.18.1             # via -r requirements.in, matplotlib, wordcloud
 packaging==20.3           # via pytest
-pillow==7.0.0             # via -r requirements.in, wordcloud
+pillow==8.0.1             # via -r requirements.in, wordcloud
 pluggy==0.13.1            # via pytest
 py==1.8.1                 # via pytest
 pyparsing==2.4.6          # via matplotlib, packaging
