@@ -15,20 +15,14 @@ def generate_fig(url, mask_path):
     logo_path = mask_path.parent / "logo.png"
     if not logo_path.exists():
 
-        content = parse_content(url)
+        r = httpx.get(url)
+        parsed_content = bs(r.content, features="html.parser")
+        content = "".join(parsed_content.findAll(text=True))
         wc_mask = np.array(Image.open(mask_path))
         wc = generate_wordcloud(content, wc_mask)
         generate_image(logo_path, wc, wc_mask)
 
     return "/static/images/logo.png"
-
-
-def parse_content(url):
-    r = httpx.get(url)
-    parsed_content = bs(r.content, features="html.parser")
-    clean_raw_content = "".join(parsed_content.findAll(text=True))
-    return clean_raw_content
-
 
 def generate_wordcloud(content, mask=None):
     stopwords = STOPWORDS | {
