@@ -4,44 +4,90 @@
 #
 #    pip-compile
 #
-atomicwrites==1.4.0       # via pytest
-attrs==19.3.0             # via pytest
-beautifulsoup4==4.9.0     # via -r requirements.in
-certifi==2019.11.28       # via httpx
-chardet==3.0.4            # via httpx
-click==7.1.2              # via flask
-colorama==0.4.3           # via pytest
-cycler==0.10.0            # via matplotlib
-flask==1.1.2              # via -r requirements.in
-h11==0.9.0                # via httpx
-h2==3.2.0                 # via httpx
-hpack==3.0.0              # via h2
-hstspreload==2020.4.28    # via httpx
-httpx==0.12.1             # via -r requirements.in
-hyperframe==5.2.0         # via h2
-idna==2.8                 # via httpx
-itsdangerous==1.1.0       # via flask
-jinja2==2.11.1            # via flask
-kiwisolver==1.1.0         # via matplotlib
-markupsafe==1.1.1         # via jinja2
-matplotlib==3.2.0         # via -r requirements.in, wordcloud
-more-itertools==8.3.0     # via pytest
-numpy==1.18.1             # via -r requirements.in, matplotlib, wordcloud
-packaging==20.3           # via pytest
-pillow==8.0.1             # via -r requirements.in, wordcloud
-pluggy==0.13.1            # via pytest
-py==1.8.1                 # via pytest
-pyparsing==2.4.6          # via matplotlib, packaging
-pytest==5.4.2             # via -r requirements.in
-python-dateutil==2.8.1    # via matplotlib
-rfc3986==1.4.0            # via httpx
-six==1.14.0               # via cycler, packaging, python-dateutil
-sniffio==1.1.0            # via httpx
-soupsieve==2.0            # via beautifulsoup4
-urllib3==1.25.8           # via httpx
-wcwidth==0.1.9            # via pytest
-werkzeug==1.0.1           # via flask
-wordcloud==1.6.0          # via -r requirements.in
+attrs==19.3.0
+    # via pytest
+beautifulsoup4==4.9.0
+    # via -r requirements.in
+certifi==2019.11.28
+    # via httpx
+chardet==3.0.4
+    # via httpx
+click==7.1.2
+    # via flask
+cycler==0.10.0
+    # via matplotlib
+flask==1.1.2
+    # via -r requirements.in
+h11==0.9.0
+    # via httpx
+h2==3.2.0
+    # via httpx
+hpack==3.0.0
+    # via h2
+hstspreload==2020.4.28
+    # via httpx
+httpx==0.12.1
+    # via -r requirements.in
+hyperframe==5.2.0
+    # via h2
+idna==2.8
+    # via httpx
+itsdangerous==1.1.0
+    # via flask
+jinja2==2.11.1
+    # via flask
+kiwisolver==1.1.0
+    # via matplotlib
+markupsafe==1.1.1
+    # via jinja2
+matplotlib==3.2.0
+    # via
+    #   -r requirements.in
+    #   wordcloud
+more-itertools==8.3.0
+    # via pytest
+numpy==1.18.1
+    # via
+    #   -r requirements.in
+    #   matplotlib
+    #   wordcloud
+packaging==20.3
+    # via pytest
+pillow==8.1.1
+    # via
+    #   -r requirements.in
+    #   wordcloud
+pluggy==0.13.1
+    # via pytest
+py==1.8.1
+    # via pytest
+pyparsing==2.4.6
+    # via
+    #   matplotlib
+    #   packaging
+pytest==5.4.2
+    # via -r requirements.in
+python-dateutil==2.8.1
+    # via matplotlib
+rfc3986==1.4.0
+    # via httpx
+six==1.14.0
+    # via
+    #   cycler
+    #   packaging
+    #   python-dateutil
+sniffio==1.1.0
+    # via httpx
+soupsieve==2.0
+    # via beautifulsoup4
+urllib3==1.25.8
+    # via httpx
+wcwidth==0.1.9
+    # via pytest
+werkzeug==1.0.1
+    # via flask
+wordcloud==1.6.0
+    # via -r requirements.in
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
