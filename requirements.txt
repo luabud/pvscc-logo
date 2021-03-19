@@ -15,7 +15,7 @@ httpx==0.12.1
 hyperframe==5.2.0
 idna==2.8
 itsdangerous==1.1.0
-Jinja2==2.11.1
+Jinja2==2.11.3
 kiwisolver==1.1.0
 MarkupSafe==1.1.1
 matplotlib==3.2.0
