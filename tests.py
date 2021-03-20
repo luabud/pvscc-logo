@@ -10,4 +10,5 @@ class TestFigure(unittest.TestCase):
         mask_path = (
             pathlib.Path(__file__).parent / "logo_app" / "static" / "images" / "python-colored-mask.png"
         )
+        # this test fails on purpose. To fix it, replace io.BytesIO with str in the line below.
         self.assertTrue(isinstance(generate_logo.generate_fig(url,mask_path), io.BytesIO))
