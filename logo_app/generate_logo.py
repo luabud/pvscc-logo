@@ -14,18 +14,15 @@ from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 def generate_fig(url, mask_path):
     logo_path = mask_path.parent / "logo.png"
     if not logo_path.exists():
-
-        content = parse_content(url)
-        wc_mask = np.array(Image.open(mask_path))
-        wc = generate_wordcloud(content, wc_mask)
-        generate_image(logo_path, wc, wc_mask)
+        parsed_content = parse_content("https://code.visualstudio.com/docs/python/editing")
+        wc = generate_wordcloud(parsed_content,np.array(Image.open(mask_path)))
+        generate_image(logo_path, wc, np.array(Image.open(mask_path)))
 
     return "/static/images/logo.png"
 
 
 def parse_content(url):
-    r = httpx.get(url)
-    parsed_content = bs(r.content, features="html.parser")
+    parsed_content = bs(httpx.get(url).content, features="html.parser")
     clean_raw_content = "".join(parsed_content.findAll(text=True))
     return clean_raw_content
 
@@ -63,3 +60,10 @@ def generate_image(logo_path, wc, mask=None):
     axes.imshow(wc, interpolation="bilinear")
 
     plt.savefig(logo_path, format="png", facecolor="black")
+
+if __name__ == "__main__":
+    url="https://code.visualstudio.com/docs/python/editing"
+    mask_path = (
+        pathlib.Path(__file__).parent /  "images" / "python-colored-mask.png"
+    )
+    generate_fig("https://code.visualstudio.com/docs/python/python-tutorial",mask_path)
