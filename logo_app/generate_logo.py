@@ -2,7 +2,6 @@ import base64
 import io
 import pathlib
 from os import path
-
 import httpx
 import matplotlib.pyplot as plt
 import numpy as np
