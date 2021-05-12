@@ -10,7 +10,6 @@ from bs4 import BeautifulSoup as bs
 from PIL import Image
 from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 
-
 def generate_fig(url, mask_path):
     logo_path = mask_path.parent / "logo.png"
     if not logo_path.exists():
@@ -20,12 +19,10 @@ def generate_fig(url, mask_path):
 
     return "/static/images/logo.png"
 
-
 def parse_content(url):
     parsed_content = bs(httpx.get(url).content, features="html.parser")
     clean_raw_content = "".join(parsed_content.findAll(text=True))
     return clean_raw_content
-
 
 def generate_wordcloud(content, mask=None):
     stopwords = STOPWORDS | {"see", "use", "using", "tutorial", "Node", "js", "file" }
@@ -33,7 +30,6 @@ def generate_wordcloud(content, mask=None):
     wc = WordCloud(background_color="black", max_words=2000, mask=mask, contour_width=10, contour_color="white", stopwords=stopwords)
 
     return wc.generate(content)
-
 
 def generate_image(logo_path, wc, mask=None):
     fig, axes = plt.subplots(1, 1)
