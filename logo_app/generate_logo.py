@@ -28,24 +28,9 @@ def parse_content(url):
 
 
 def generate_wordcloud(content, mask=None):
-    stopwords = STOPWORDS | {
-        "see",
-        "use",
-        "using",
-        "tutorial",
-        "Node",
-        "js",
-        "file",
-    }
+    stopwords = STOPWORDS | {"see", "use", "using", "tutorial", "Node", "js", "file" }
     
-    wc = WordCloud(
-        background_color="black",
-        max_words=2000,
-        mask=mask,
-        contour_width=10,
-        contour_color="white",
-        stopwords=stopwords,
-    )
+    wc = WordCloud(background_color="black", max_words=2000, mask=mask, contour_width=10, contour_color="white", stopwords=stopwords)
 
     return wc.generate(content)
 
