@@ -1,3 +1,4 @@
+import io
 import pathlib
 import httpx
 import matplotlib.pyplot as plt
