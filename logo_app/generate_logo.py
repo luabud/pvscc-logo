@@ -35,9 +35,6 @@ def generate_image(logo_path, wc, mask=None):
 
     axes.imshow(wc, interpolation="bilinear")
 
-    plt.autoscale(enable= True, axis="x", tight=True)
-
-
     plt.savefig(logo_path, format="png", facecolor="black")
 
 if __name__ == "__main__":
