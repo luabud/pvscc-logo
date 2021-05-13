@@ -35,7 +35,7 @@ def generate_image(logo_path, wc, mask=None):
         wc = wc.recolor(color_func=image_colors)
 
     axes.imshow(wc, interpolation="bilinear")
-
+    
     plt.savefig(logo_path, format="png", facecolor="black")
 
 if __name__ == "__main__":
