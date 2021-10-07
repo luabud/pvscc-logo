@@ -1,4 +1,3 @@
-import pytest
 import unittest
 from logo_app import generate_logo
 import io
