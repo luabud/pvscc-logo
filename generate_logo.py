@@ -14,7 +14,7 @@ def generate_fig(url, mask_path):
     if not logo_path.exists():
         wc = generate_wordcloud(parse_content(url),np.array(Image.open(mask_path)))
         generate_image(logo_path, wc, np.array(Image.open(mask_path)))
-
+        
     return "/static/images/logo.png"
 
 
