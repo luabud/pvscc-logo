@@ -10,10 +10,14 @@ from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 def generate_fig(url, mask_path):
     logo_path = mask_path.parent / "logo.png"
     if not logo_path.exists():
-        wc = generate_wordcloud(parse_content(url),np.array(Image.open(mask_path)))
-        generate_image(logo_path, wc, np.array(Image.open(mask_path)))
+        parse_raw_content(url, mask_path, logo_path)
 
     return "/static/images/logo.png"
+
+def parse_raw_content(url, mask_path, logo_path):
+    raw_parsed_content = parse_content(url)
+    wc = generate_wordcloud(raw_parsed_content,np.array(Image.open(mask_path)))
+    generate_image(logo_path, wc, np.array(Image.open(mask_path)))
 
 def parse_content(url):
     parsed_content = bs(httpx.get(url).content, features="html.parser")
@@ -36,6 +40,7 @@ def generate_image(logo_path, wc, mask=None):
 
     axes.imshow(wc, interpolation="bilinear")
     
+    plt.autoscale(enable=True,axis="x", tight=True)
     plt.savefig(logo_path, format="png", facecolor="black")
 
 if __name__ == "__main__":
