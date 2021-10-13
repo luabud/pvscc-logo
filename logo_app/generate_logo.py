@@ -7,16 +7,15 @@ from bs4 import BeautifulSoup as bs
 from PIL import Image
 from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 
+
 def generate_fig(url, mask_path):
     logo_path = mask_path.parent / "logo.png"
     if not logo_path.exists():
         parse_raw_content(url, mask_path, logo_path)
-
     return "/static/images/logo.png"
 
 def parse_raw_content(url, mask_path, logo_path):
-    raw_parsed_content = parse_content(url)
-    wc = generate_wordcloud(raw_parsed_content,np.array(Image.open(mask_path)))
+    wc = generate_wordcloud(parse_content(url), np.array(Image.open(mask_path)))
     generate_image(logo_path, wc, np.array(Image.open(mask_path)))
 
 def parse_content(url):
@@ -25,10 +24,8 @@ def parse_content(url):
     return clean_raw_content
 
 def generate_wordcloud(content, mask=None):
-    stopwords = STOPWORDS | {"see", "use", "using", "tutorial", "Node", "js", "file" }
-    
-    wc = WordCloud(background_color="black", max_words=2000, mask=mask, contour_width=10, contour_color="white", stopwords=stopwords)
-
+    stopwords = STOPWORDS | {"see", "use", "using", "tutorial", "Node", "js", "file"}
+    wc = WordCloud(background_color="black", max_words=2000, mask=mask,contour_width=10, contour_color="white", stopwords=stopwords)
     return wc.generate(content)
 
 def generate_image(logo_path, wc, mask=None):
@@ -39,13 +36,10 @@ def generate_image(logo_path, wc, mask=None):
         wc = wc.recolor(color_func=image_colors)
 
     axes.imshow(wc, interpolation="bilinear")
-    
-    plt.autoscale(enable=True,axis="x", tight=True)
+
     plt.savefig(logo_path, format="png", facecolor="black")
 
 if __name__ == "__main__":
-    url="https://code.visualstudio.com/docs/python/python-tutorial"
-    mask_path = (
-        pathlib.Path(__file__).parent /  "images" / "python-colored-mask.png"
-    )
-    generate_fig(url,mask_path)
+    url = "https://code.visualstudio.com/docs/python/python-tutorial"
+    mask_path = (pathlib.Path(__file__).parent / "static" / "images" / "python-colored-mask.png")
+    generate_fig(url, mask_path)
