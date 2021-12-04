@@ -2,7 +2,7 @@ import pathlib
 
 from flask import Flask, render_template
 
-from . import generate_logo
+from . import generate_logo_app
 from . import app
 
 
@@ -12,6 +12,6 @@ def index():
     mask_path = (
         pathlib.Path(__file__).parent / "static" / "images" / "python-colored-mask.png"
     )
-    output = generate_logo.generate_fig(url, mask_path)
+    output = generate_logo_app.generate_fig(url, mask_path)
 
     return render_template("index.html", image=output)
