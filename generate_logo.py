@@ -35,7 +35,7 @@ def generate_wordcloud(content, mask=None):
         "js",
         "file",
     }
-    
+
     wc = WordCloud(
         background_color="black",
         max_words=2000,
@@ -62,6 +62,6 @@ def generate_image(logo_path, wc, mask=None):
 if __name__ == "__main__":
     url="https://code.visualstudio.com/docs/python/editing"
     mask_path = (
-        pathlib.Path(__file__).parent /  "images" / "python-colored-mask.png"
+        pathlib.Path(__file__).parent / "logo_app" / "static" / "images" / "python-colored-mask.png"
     )
     generate_fig("https://code.visualstudio.com/docs/python/python-tutorial",mask_path)
