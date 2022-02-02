@@ -62,5 +62,5 @@ def generate_image(logo_path, wc, mask=None):
 
 if __name__ == "__main__":
     url = "https://code.visualstudio.com/docs/python/editing"
-    mask_path = pathlib.Path(__file__).parent / "logo_app" / "static" / "images" / "python-colored-mask.png"
+    mask_path = pathlib.Path(__file__).parent / "static" / "images" / "python-colored-mask.png"
     generate_fig("https://code.visualstudio.com/docs/python/python-tutorial", mask_path)
