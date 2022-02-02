@@ -11,7 +11,7 @@ from wordcloud import STOPWORDS, ImageColorGenerator, WordCloud
 def generate_fig(url, mask_path):
     logo_path = mask_path.parent / "logo.png"
     if not logo_path.exists():
-        parsed_content = parse_content(url)
+        parsed_content = "" #update here to call parse_content function below
         wc = generate_wordcloud(parsed_content, np.array(Image.open(mask_path)))
 
         generate_image(logo_path, wc, np.array(Image.open(mask_path)))
