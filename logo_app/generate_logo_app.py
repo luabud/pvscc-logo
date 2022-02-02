@@ -1,5 +1,3 @@
-import base64
-import io
 import pathlib
 from os import path
 
@@ -37,7 +35,7 @@ def generate_wordcloud(content, mask=None):
         "js",
         "file",
     }
-    
+
     wc = WordCloud(
         background_color="black",
         max_words=2000,
