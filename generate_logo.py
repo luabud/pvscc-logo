@@ -1,4 +1,3 @@
-import io
 from bs4 import BeautifulSoup as bs
 import pathlib
 from os import path
