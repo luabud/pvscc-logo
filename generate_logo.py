@@ -64,3 +64,4 @@ if __name__ == "__main__":
         pathlib.Path(__file__).parent / "logo_app" / "static" / "images" / "python-colored-mask.png"
     )
     generate_fig("https://code.visualstudio.com/docs/python/python-tutorial",mask_path)
+    print("Logo generated!")
